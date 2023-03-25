@@ -7,10 +7,12 @@ from datetime import datetime, timedelta, date
 import openai
 
 # st.set_page_config(layout="wide")
-
+# API Key
+openai.api_key = "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"
 # Create the container
 title = st.container()
 sidebar = st.container()
+about = st.container()
 dfset = st.container()
 graph = st.container()
 open_close = st.container()
@@ -18,6 +20,11 @@ high_low = st.container()
 volume = st.container()
 change = st.container()
 
+csv = pd.read_csv('https://raw.githubusercontent.com/dhhagan/stocks/master/scripts/stock_info.csv')
+dictionary = dict(zip(csv['Ticker'], csv['Name']))
+
+
+# Title
 with title:
     st.title('Trade Prophet')
     st.markdown('This app built with Streamlit would give you the performance of the stocks today.')
@@ -27,21 +34,32 @@ with sidebar:
     st.sidebar.title('Options')
     market = st.sidebar.selectbox('Enter Market', np.array(['NYSE', 'NASDAQ']))
     if market == 'NYSE':
-        ticker = st.sidebar.selectbox('Enter Ticker', ('C', 'JPM', 'WFC', 'BAC')   )
+        ticker = st.sidebar.selectbox('Enter Ticker', ('C', 'JPM', 'WFC', 'BAC'))
     elif market == 'NASDAQ':
         ticker = st.sidebar.selectbox('Enter Ticker', ('AAPL', 'MSFT', 'GOOG', 'AMZN', 'FB', 'GOOG', 'AMD'))
     start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=100))
     end = st.sidebar.date_input('Enter End Date', date.today())
 
-# dfset
+# Dataset
 df = yf.download(ticker, start=start, end=end)
 df = df[::-1]
 
-
-# Graph
-with graph:
-    st.header(ticker)
+with about:
+    st.subheader('About')
+    text = 'Write a brief explanation of the history and purpose of' + dictionary[ticker] + '.'
     
+    output = openai.Completion.create(
+        prompt=text, 
+        model='text-davinci-003',
+        max_tokens=1000, 
+    )
+    output = str(output['choices'][0]['text'])
+    # st.write(dictionary[ticker])
+    st.write(output)
+    
+     
+# Graph
+   
 # Volume
 with volume:
     
@@ -105,4 +123,3 @@ with change:
     # Chagne in volume
     col5, col6, col7 = st.columns(3)
     col5.metric('Volume', str(volume_now), str(volume_change) +'(' + str(volume_percent) + '%)')
-    
