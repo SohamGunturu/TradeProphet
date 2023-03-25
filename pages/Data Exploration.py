@@ -24,3 +24,5 @@ st.write("2) A graph showing open and close values of stocks over time")
 st.write("3) A graph showing high and low values of stocks over time")
 
 st.write("Furthermore, our graph shows the change in open, close, high, low, and volume values over the given interval below the visuals")
+st.header('Machine Learning Algorithm')
+st.write('In the dataset the close price is shifted based on the days the user wants to see. So for example, if you use the slider and select 10 days the closing price would be shifted by 10 days and it would be saved in the **prediction** column. Next, we would use that to predict the close price using the random forest regressor model. For that the dataset would be split into 80% train and 20% test sets. Then ')
