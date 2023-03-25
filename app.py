@@ -53,3 +53,8 @@ with change:
     open_now = round(float(str(df.tail(1)['Open'].values[0])), 2)
     high_now = round(float(str(df.tail(1)['High'].values[0])), 2)
     low_now = round(float(str(df.tail(1)['Low'].values[0])), 2)
+
+    close_past = round(float(str(df.head(1)['Close'].values[0])), 2)
+    open_past = round(float(str(df.head(1)['Open'].values[0])), 2)
+    high_past = round(float(str(df.head(1)['High'].values[0])), 2)
+    low_past = round(float(str(df.head(1)['Low'].values[0])), 2)
