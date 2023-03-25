@@ -63,3 +63,8 @@ with change:
     open_change = round(open_past - open_now, 2)
     high_change = round(high_past - high_now, 2)
     low_change = round(low_past - low_now, 2)
+    
+    close_percent = round(close_change / close_past * 100, 2)
+    open_percent = round(open_change / open_past * 100, 2)
+    high_percent = round(high_change / high_past * 100, 2)
+    low_percent = round(low_change / low_past * 100, 
