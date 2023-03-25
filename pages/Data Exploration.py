@@ -19,9 +19,7 @@ st.write(df.head(20))
 
 st.write("The data above is just the ticker for Apple. Instead of specifically being apple, our app takes in your input and retrieves the necessary data for that.")
 
-st.write("Furthermore, our app is customized to choose between the New York Stock Exchange or National Associaton of Securities Dealers Automated Quotations.")
-st.write("For example, Apple is part of NASDAQ, while a company like JP Morgan Chase is part of the NYSE. This adds another layer of customization within our app.")
-st.write("The user also slices the data by choosing a start and an end date.")
+st.write("Furthermore, our app is customized to choose between the New York Stock Exchange or National Associaton of Securities Dealers Automated Quotations. For example, Apple is part of NASDAQ, while a company like JP Morgan Chase is part of the NYSE. This adds another layer of customization within our app. The user also slices the data by choosing a start and an end date.")
 
 st.write("Once the user enters all of their input, the dashboard shows 3 visuals:")
 st.write("1) A graph showing volume of stocks over time")
