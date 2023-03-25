@@ -84,3 +84,5 @@ with change:
     col3, col4 = st.columns(2)
     col3.metric('High', str(high_now), str(high_change) + ' (' + str(high_percent) + '%)')
     col4.metric('Low', str(low_now), str(low_change) +'(' + str(low_percent) + '%)')
+
+    # Hi
