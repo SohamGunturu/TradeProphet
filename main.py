@@ -7,8 +7,7 @@ from datetime import datetime, timedelta, date
 import openai
 
 # st.set_page_config(layout="wide")
-st.title('Trade Prophet')
-st.markdown('This app built with Streamlit would give you the performance of the stocks today.')
+
 # Create the container
 title = st.container()
 sidebar = st.container()
@@ -17,6 +16,10 @@ open_close = st.container()
 high_low = st.container()
 volume = st.container()
 change = st.container()
+
+with title:
+    st.title('Trade Prophet')
+    st.markdown('This app built with Streamlit would give you the performance of the stocks today.')
 
 # Sidebar
 with sidebar:
