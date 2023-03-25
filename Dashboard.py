@@ -14,7 +14,7 @@ import openai
 # st.set_page_config(layout="wide")
 # API Key
 
-openai.api_key = "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"
+openai.api_key = "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" #This is a demo api key - please get your own OPENAI key to run this properly.
 # Create the container
 title = st.container()
 sidebar = st.container()
