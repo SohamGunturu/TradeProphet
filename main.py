@@ -12,6 +12,7 @@ import openai
 title = st.container()
 sidebar = st.container()
 dfset = st.container()
+graph = st.container()
 open_close = st.container()
 high_low = st.container()
 volume = st.container()
@@ -36,18 +37,26 @@ with sidebar:
 df = yf.download(ticker, start=start, end=end)
 df = df[::-1]
 
+
+# Graph
+with graph:
+    st.header(ticker)
+    
 # Volume
 with volume:
+    
     fig_vol = px.area(df, x=df.index, y="Volume", title='Trading Volume over the interval')
     st.plotly_chart(fig_vol)
 
 # Open Close
 with open_close:
+    st.subheader('Open and Close')
     fig_oc = px.line(df, x = df.index, y = ["Open", "Close"], title = "Open and Close over the interval")
     st.plotly_chart(fig_oc)
 
 # High Low
 with high_low:
+    st.subheader('High and Low')
     fig_hl = px.line(df, x = df.index, y = ["High", "Low"], title = "High and Low over the interval")
     st.plotly_chart(fig_hl)
 
