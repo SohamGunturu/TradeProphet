@@ -12,6 +12,7 @@ import openai
 
 # st.set_page_config(layout="wide")
 # API Key
+
 openai.api_key = "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"
 # Create the container
 title = st.container()
@@ -24,6 +25,8 @@ high_low = st.container()
 volume = st.container()
 change = st.container()
 prediction = st.container()
+
+
 # dictionary
 csv = pd.read_csv('https://raw.githubusercontent.com/dhhagan/stocks/master/scripts/stock_info.csv')
 dictionary = dict(zip(csv['Ticker'], csv['Name']))
@@ -134,8 +137,8 @@ with change:
         X = np.array(data.drop(columns=['Prediction'], axis=1))[:-future_days]
         y = np.array(data['Prediction'])[:-future_days]
         x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        #model = RandomForestRegressor(n_estimators=100, max_depth=20)
-        model = DecisionTreeRegressor(max_depth=20, random_state=2)
+        model = RandomForestRegressor(n_estimators=100, max_depth=20)
+        #model = DecisionTreeRegressor(max_depth=20, random_state=2)
         x_future = data.drop(columns=['Prediction'], axis=1)[:-future_days]
         x_future = x_future.tail(future_days)
         x_future = np.array(x_future)
@@ -151,5 +154,5 @@ with change:
         st.plotly_chart(predict_graph)
 
         score = str(float(round(model.score(x_test, y_test) * 100, 2)))
-        print(score)
+        st.subheader('Model Score: ' + score + '%')
         
