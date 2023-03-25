@@ -56,24 +56,28 @@ with change:
     open_now = round(float(str(df.head(1)['Open'].values[0])), 2)
     high_now = round(float(str(df.head(1)['High'].values[0])), 2)
     low_now = round(float(str(df.head(1)['Low'].values[0])), 2)
+    volume_now = round(float(str(df.head(1)['Volume'].values[0])), 2)
 
     # Data for the first day on the dataset
     close_past = round(float(str(df.tail(1)['Close'].values[0])), 2)
     open_past = round(float(str(df.tail(1)['Open'].values[0])), 2)
     high_past = round(float(str(df.tail(1)['High'].values[0])), 2)
     low_past = round(float(str(df.tail(1)['Low'].values[0])), 2)
+    volume_past = round(float(str(df.tail(1)['Volume'].values[0])), 2)
 
     # Change in the price
     close_change = round(close_now - close_past, 2)
     open_change = round(open_now - open_past, 2)
     high_change = round(high_now - high_past, 2)
     low_change = round(low_now - low_past, 2)
+    volume_change = round(volume_now - volume_past, 2)
 
     # Change in percentage based on the first day
     close_percent = round(close_change / close_past * 100, 2)
     open_percent = round(open_change / open_past * 100, 2)
     high_percent = round(high_change / high_past * 100, 2)
     low_percent = round(low_change / low_past * 100)
+    volume_percent = round(volume_change / volume_past * 100, 2)
 
     # Open and Close
     col1, col2 = st.columns(2)
@@ -85,4 +89,6 @@ with change:
     col3.metric('High', str(high_now), str(high_change) + ' (' + str(high_percent) + '%)')
     col4.metric('Low', str(low_now), str(low_change) +'(' + str(low_percent) + '%)')
 
-    # Hi
+    # Chagne in volume
+    col5, col6, col7 = st.columns(3)
+    col6.metric('Volume', str(volume_now), str(volume_change) +'(' + str(volume_percent) + '%)')
