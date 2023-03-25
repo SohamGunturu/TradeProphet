@@ -38,17 +38,17 @@ df = df[::-1]
 
 # Volume
 with volume:
-    fig_vol = px.area(df, x=df.index, y="Volume", title='Volume')
+    fig_vol = px.area(df, x=df.index, y="Volume", title='Trading Volume over the interval')
     st.plotly_chart(fig_vol)
 
 # Open Close
 with open_close:
-    fig_oc = px.line(df, x = df.index, y = ["Open", "Close"], title = "Open - Close")
+    fig_oc = px.line(df, x = df.index, y = ["Open", "Close"], title = "Open and Close over the interval")
     st.plotly_chart(fig_oc)
 
 # High Low
 with high_low:
-    fig_hl = px.line(df, x = df.index, y = ["High", "Low"], title = "High - Low")
+    fig_hl = px.line(df, x = df.index, y = ["High", "Low"], title = "High and Low over the interval")
     st.plotly_chart(fig_hl)
 
 # Change
@@ -96,3 +96,4 @@ with change:
     # Chagne in volume
     col5, col6, col7 = st.columns(3)
     col5.metric('Volume', str(volume_now), str(volume_change) +'(' + str(volume_percent) + '%)')
+    
