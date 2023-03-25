@@ -4,12 +4,13 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 from datetime import datetime, timedelta, date
+import openai
 
 # st.set_page_config(layout="wide")
 st.title('Trade Prophet')
 st.markdown('This app built with Streamlit would give you the performance of the stocks today.')
 # Create the container
-
+title = st.container()
 sidebar = st.container()
 dfset = st.container()
 open_close = st.container()
@@ -50,7 +51,7 @@ with high_low:
 # Change
 
 with change:
-
+    st.subheader('Change')
     # Data for current day
     close_now = round(float(str(df.head(1)['Close'].values[0])), 2)
     open_now = round(float(str(df.head(1)['Open'].values[0])), 2)
