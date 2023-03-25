@@ -58,8 +58,7 @@ with sidebar:
         ticker = st.sidebar.selectbox('Enter Ticker', nasdaq)
     start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=100))
     end = st.sidebar.date_input('Enter End Date', date.today())
-    future_days = st.sidebar.slider('Enter Future Days', 20, 100) 
-
+    
 # Dataset
 df = yf.download(ticker, start=start, end=end)
 df = df[::-1]
@@ -141,32 +140,6 @@ with change:
     # Chagne in volume
     col5, col6, col7 = st.columns(3)
     col5.metric('Volume', str(volume_now), str(volume_change) +'(' + str(volume_percent) + '%)')
-
-    with prediction:
-        st.header('Prediction')
-        data = yf.download(ticker, start=date.today() - relativedelta(days=future_days * 100), end=date.today())
-        data['Prediction'] = data['Close'].shift(-future_days)
-        X = np.array(data.drop(columns=['Prediction'], axis=1))[:-future_days]
-        y = np.array(data['Prediction'])[:-future_days]
-        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        #model = RandomForestRegressor(n_estimators=10, max_depth=10)
-        model = DecisionTreeRegressor(max_depth=20, random_state=2)
-        x_future = data.drop(columns=['Prediction'], axis=1)[:-future_days]
-        x_future = x_future.tail(future_days)
-        x_future = np.array(x_future)
-        model.fit(x_train, y_train)
-        forest_prediction = model.predict(x_future)
-        predictions = forest_prediction
-        valid = data[X.shape[0]:].copy()
-        valid['Prediction'] = predictions
-        valid.drop(columns=['Prediction'], axis=1)
-        # print(valid.head())
-        predict_graph = px.line(valid, x=valid.index, y=['Close', 'Prediction'])
-        predict_graph.update_layout(title='Close vs Prediction', xaxis_title='Date', yaxis_title='Price')
-        st.plotly_chart(predict_graph)
-
-        score = str(float(round(model.score(x_test, y_test) * 100, 2)))
-        st.subheader('Model Score: ' + score + '%')
 
     with verdict:
         if (float(volume_change) > 0 and float(close_change) > 0) or (float(volume_change) < 0 and float(close_change) < 0):
