@@ -4,13 +4,6 @@ from datetime import datetime, timedelta, date
 import pandas as pd
 import plotly.express as px
 
-hide_table_row_index = """
-            <style>
-            thead tr th:first-child {display:none}
-            tbody th {display:none}
-            </style>
-            """
-
 st.set_page_config(layout = "wide")
 st.title("Our Data")
 st.header("On this page, we will consider how we explored our dataset and how that led to our dashboard!")
