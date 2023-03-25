@@ -25,6 +25,7 @@ open_close = st.container()
 high_low = st.container()
 volume = st.container()
 change = st.container()
+verdict = st.container()
 prediction = st.container()
 
 
@@ -39,15 +40,17 @@ with title:
 
 # Sidebar
 with sidebar:
+    nyse = pd.read_csv('nyse.csv')
+    nyse = np.array(nyse['Symbol'])
     st.sidebar.title('Options')
     market = st.sidebar.selectbox('Enter Market', np.array(['NYSE', 'NASDAQ']))
     if market == 'NYSE':
-        ticker = st.sidebar.selectbox('Enter Ticker', ('C', 'JPM', 'WFC', 'BAC'))
+        ticker = st.sidebar.selectbox('Enter Ticker', nyse)
     elif market == 'NASDAQ':
         ticker = st.sidebar.selectbox('Enter Ticker', ('AAPL', 'MSFT', 'GOOG', 'AMZN', 'FB', 'GOOG', 'AMD'))
     start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=100))
     end = st.sidebar.date_input('Enter End Date', date.today())
-    future_days = st.sidebar.slider('Enter Future Days', 10, 100) 
+    future_days = st.sidebar.slider('Enter Future Days', 20, 100) 
 
 # Dataset
 df = yf.download(ticker, start=start, end=end)
@@ -133,13 +136,13 @@ with change:
 
     with prediction:
         st.header('Prediction')
-        data = yf.download(ticker, start=date.today() - relativedelta(days=future_days * 1000), end=date.today())
+        data = yf.download(ticker, start=date.today() - relativedelta(days=future_days * 100), end=date.today())
         data['Prediction'] = data['Close'].shift(-future_days)
         X = np.array(data.drop(columns=['Prediction'], axis=1))[:-future_days]
         y = np.array(data['Prediction'])[:-future_days]
         x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        model = RandomForestRegressor(n_estimators=100, max_depth=20)
-        #model = DecisionTreeRegressor(max_depth=20, random_state=2)
+        #model = RandomForestRegressor(n_estimators=10, max_depth=10)
+        model = DecisionTreeRegressor(max_depth=20, random_state=2)
         x_future = data.drop(columns=['Prediction'], axis=1)[:-future_days]
         x_future = x_future.tail(future_days)
         x_future = np.array(x_future)
@@ -156,4 +159,16 @@ with change:
 
         score = str(float(round(model.score(x_test, y_test) * 100, 2)))
         st.subheader('Model Score: ' + score + '%')
+
+    with verdict:
+        if (float(volume_change) > 0 and float(close_change) > 0) or (float(volume_change) < 0 and float(close_change) < 0):
+            verdict = 'This stock was bullish at that time. 🐮'
+            text = 'Bullish market, in securities and commodities trading, a rising market. A bull is an investor who expects prices to rise and, on this assumption, purchases a security or commodity in hopes of reselling it later for a profit. A bullish market is one in which prices are generally expected to rise. Compare bear markets, which are those in which prices are expected to fall.'
+        else:
+            verdict = 'This stock was bearish at that time. 🐻'
+            text = 'A bear market is when a market experiences prolonged price declines. It typically describes a condition in which securities prices fall 20% or more from recent highs amid widespread pessimism and negative investor sentiment. A bear market is one in which prices are generally expected to fall. Compare bullish markets, which are those in which prices are expected to rise.'
+
+        st.header('Verdict')
+        st.subheader(verdict)
+        st.write(text)
         
