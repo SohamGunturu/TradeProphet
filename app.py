@@ -58,3 +58,8 @@ with change:
     open_past = round(float(str(df.head(1)['Open'].values[0])), 2)
     high_past = round(float(str(df.head(1)['High'].values[0])), 2)
     low_past = round(float(str(df.head(1)['Low'].values[0])), 2)
+
+    close_change = round(close_past - close_now, 2)
+    open_change = round(open_past - open_now, 2)
+    high_change = round(high_past - high_now, 2)
+    low_change = round(low_past - low_now, 2)
