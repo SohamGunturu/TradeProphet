@@ -25,16 +25,23 @@ with sidebar:
         ticker = st.sidebar.selectbox('Enter Ticker', ('C', 'JPM', 'WFC', 'BAC')   )
     elif market == 'NASDAQ':
         ticker = st.sidebar.selectbox('Enter Ticker', ('AAPL', 'MSFT', 'GOOG', 'AMZN', 'FB', 'GOOG'))
-    start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=365))
+    start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=100))
     end = st.sidebar.date_input('Enter End Date')
 
 # Dataset
 df = yf.download(ticker, start=start, end=end)
 
+# Volume
 with volume:
     fig_vol = px.area(df, x=df.index, y="Volume", title='Volume')
     st.plotly_chart(fig_vol)
 
+# Open Close
 with open_close:
     fig_oc = px.line(df, x = df.index, y = ["Open", "Close"], title = "Open - Close")
     st.plotly_chart(fig_oc)
+
+# High Low
+with high_low:
+    fig_hl = px.line(df, x = df.index, y = ["High", "Low"], title = "High - Low")
+    st.plotly_chart(fig_hl)
