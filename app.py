@@ -14,4 +14,8 @@ sidebar = st.container()
 # 
 with sidebar:
     st.sidebar.title('Options')
-    st.sidebar.selectbox('Enter Market', np.array(['NYSE', 'NASDAQ']))
+    market = st.sidebar.selectbox('Enter Market', np.array(['NYSE', 'NASDAQ']))
+    if market == 'NYSE':
+        ticker = st.sidebar.selectbox('Enter Ticker', ('C', 'JPM', 'WFC', 'BAC')   )
+    elif market == 'NASDAQ':
+        ticker = st.sidebar.selectbox('Enter Ticker', ('AAPL', 'MSFT', 'GOOG', 'AMZN', 'FB', 'GOOG'))
