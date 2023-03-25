@@ -29,9 +29,19 @@ verdict = st.container()
 prediction = st.container()
 
 
-# dictionary
-csv = pd.read_csv('csv.csv')
-dictionary = dict(zip(csv['Ticker'], csv['Name']))
+# nasdaq stocks
+nasdaq = sorted(
+['AAPL', 'TWTR', 'MSFT', 'COIN','TSLA', 'AMZN', 'GOOG', 'FB', 'NFLX', 'INTC', 'CSCO', 'CMCSA', 'NVDA', 'AMD', 'ADBE', 'ADP', 'ADSK', 'AKAM', 'ADI','QCOM','AMGN'])
+
+
+# nyse stocks
+nyse = sorted(
+['HD', 'WMT', 'JPM', 'BAC', 'C', 'WFC', 'PFE', 'T', 'MA', 'UNH', 'KO', 'VZ', 'DIS', 'PG', 'MCD', 'MRK', 'PEP', 'MGM', 'BA', 'CAT', 'DD', 'JNJ', 'MMM', 'AXP', 'XOM', 'PNC', 'XOM', 'CME', 'TMO', 'COP', 'CVS',  'ORCL', 'PLTR', 'NKE', 'NOC'])
+
+
+# companies and tickers
+dictonary = {'AAPL': 'Apple', 'MSFT': 'Microsoft', 'TSLA': 'Tesla', 'AMZN': 'Amazon', 'GOOG': 'Google', 'FB': 'Meta', 'HD': 'Home Depot', 'NFLX': 'Netflix', 'TWTR': 'Twitter', 'WMT': 'Walmart', 'JPM': 'JP Morgan', 'BAC': 'Bank of America', 'C': 'Citigroup', 'WFC': 'Wells Fargo', 'PFE': 'Pfizer','T': 'AT&T', 'INTC': 'Intel Corp', 'CSCO': 'Cisco', 'V'  : 'Visa', 'MA' : 'Mastercard', 'UNH': 'UnitedHealth', 'KO' : 'Coca-Cola', 'VZ' : 'Verizon', 'DIS': 'Disney', 'PG' : 'Procter & Gamble', 'MCD': 'McDonalds', 'MRK': 'Merck', 'PEP': 'PepsiCo, Inc.', 'MGM': 'MGM Resorts International', 'BA' : 'Boeing', 'CAT': 'Caterpillar', 'DD' : 'DuPont', 'JNJ': 'Johnson & Johnson', 'MMM': '3M', 'AXP': 'American Express', 'PNC': 'PNC', 'UNP': 'Union Pacific', 'CVS': 'CVS Health Corp', 'CMCSA': 'Comcast', 'COP': 'ConocoPhillips', 'TMO': 'T-Mobile', 'CME': 'Chicago Mercantile Exchange', 'XOM':'Exxon Mobil Corp', 'ORCL': 'Oracle Corp', 'NVDA': 'Nvidia', 'AMD': 'Advanced Micro Devices', 'ADBE': 'Adobe Systems Inc', 'ADP': 'Automatic data Processing', 'PLTR': 'Paylocity', 'AMAT': 'Applied Materials', 'ADSK': 'Autodesk', 'AKAM': 'Akamai Technologies', 'QCOM': 'Qualcomm', 'NKE': 'Nike', 'AMGN': 'Amgen', 'ADI': 'Analog Devices', 'NOC': 'Northrop Grumman' }
+
 
 # Title
 with title:
@@ -40,8 +50,6 @@ with title:
 
 # Sidebar
 with sidebar:
-    nyse = pd.read_csv('nyse.csv')
-    nyse = np.array(nyse['Symbol'])
     st.sidebar.title('Options')
     market = st.sidebar.selectbox('Enter Market', np.array(['NYSE', 'NASDAQ']))
     if market == 'NYSE':
