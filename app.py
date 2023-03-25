@@ -70,3 +70,5 @@ with change:
     low_percent = round(low_change / low_past * 100)
 
     col1, col2 = st.columns(2)
+    col1.metric('Close', str(close_now), str(close_change) +'(' + str(close_percent) + '%)')
+    col2.metric('Open', str(open_now), str(open_change) + ' (' + str(open_percent) + '%)')
