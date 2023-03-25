@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, date
 
 # st.set_page_config(layout="wide")
 st.title('Trade Prophet')
-
+st.markdown('This app built with Streamlit would give you the performance of the stocks today.')
 # Create the container
 
 sidebar = st.container()
@@ -26,7 +26,7 @@ with sidebar:
     elif market == 'NASDAQ':
         ticker = st.sidebar.selectbox('Enter Ticker', ('AAPL', 'MSFT', 'GOOG', 'AMZN', 'FB', 'GOOG', 'AMD'))
     start = st.sidebar.date_input('Enter Start Date', date.today() - timedelta(days=100))
-    end = st.sidebar.date_input('Enter End Date')
+    end = st.sidebar.date_input('Enter End Date', date.today())
 
 # dfset
 df = yf.download(ticker, start=start, end=end)
