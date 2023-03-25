@@ -29,7 +29,7 @@ prediction = st.container()
 
 
 # dictionary
-csv = pd.read_csv('https://raw.githubusercontent.com/dhhagan/stocks/master/scripts/stock_info.csv')
+csv = pd.read_csv('csv.csv')
 dictionary = dict(zip(csv['Ticker'], csv['Name']))
 
 # Title
