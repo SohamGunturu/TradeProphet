@@ -20,9 +20,9 @@ high_low = st.container()
 volume = st.container()
 change = st.container()
 
+# dictionary
 csv = pd.read_csv('https://raw.githubusercontent.com/dhhagan/stocks/master/scripts/stock_info.csv')
 dictionary = dict(zip(csv['Ticker'], csv['Name']))
-
 
 # Title
 with title:
@@ -58,8 +58,6 @@ with about:
     st.write(output)
     
      
-# Graph
-   
 # Volume
 with volume:
     
