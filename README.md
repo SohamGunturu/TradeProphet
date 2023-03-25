@@ -10,7 +10,7 @@ The program utilizes the **plotly** and **yfinance** libraries to create visuali
 [Soham Gunturu](https://github.com/SohamGunturu)   
 [Farhan Sadeek](https://github.com/SadeekFarhan21)   
 [Varun Dommeti](https://github.com/d-varun)     
-[Kalyan Sommisetty](https://github.com/kalsomisetty)
+[Kalyan Somisetty](https://github.com/kalsomisetty)
 
 <!--- VD: add prediction text if able -->
 <!--- VD: add requirements for running program -->
