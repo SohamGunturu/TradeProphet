@@ -162,10 +162,10 @@ with change:
 
     with verdict:
         if (float(volume_change) > 0 and float(close_change) > 0) or (float(volume_change) < 0 and float(close_change) < 0):
-            verdict = 'This stock was bullish at that time. 🐮'
+            verdict = 'This stock was 🐮ish at that time.'
             text = 'Bullish market, in securities and commodities trading, a rising market. A bull is an investor who expects prices to rise and, on this assumption, purchases a security or commodity in hopes of reselling it later for a profit. A bullish market is one in which prices are generally expected to rise. Compare bear markets, which are those in which prices are expected to fall.'
         else:
-            verdict = 'This stock was bearish at that time. 🐻'
+            verdict = 'This stock was 🐻ish at that time'
             text = 'A bear market is when a market experiences prolonged price declines. It typically describes a condition in which securities prices fall 20% or more from recent highs amid widespread pessimism and negative investor sentiment. A bear market is one in which prices are generally expected to fall. Compare bullish markets, which are those in which prices are expected to rise.'
 
         st.header('Verdict')
