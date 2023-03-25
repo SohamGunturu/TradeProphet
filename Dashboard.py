@@ -3,7 +3,8 @@ import yfinance as yf
 import pandas as pd
 import plotly.express as px
 import numpy as np
-from datetime import datetime, timedelta, date, relativedelta
+from datetime import datetime, timedelta, date
+from dateutil.relativedelta import relativedelta
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
