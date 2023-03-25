@@ -79,3 +79,8 @@ with change:
     col1, col2 = st.columns(2)
     col1.metric('Close', str(close_now), str(close_change) +' (' + str(close_percent) + '%)')
     col2.metric('Open', str(open_now), str(open_change) + ' (' + str(open_percent) + '%)')
+
+    # High and Low
+    col3, col4 = st.columns(2)
+    col3.metric('High', str(high_now), str(high_change) + ' (' + str(high_percent) + '%)')
+    col4.metric('Low', str(low_now), str(low_change) +'(' + str(low_percent) + '%)')
