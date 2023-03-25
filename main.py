@@ -45,7 +45,7 @@ df = yf.download(ticker, start=start, end=end)
 df = df[::-1]
 
 with about:
-    st.subheader('About')
+    st.subheader(dictionary[ticker])
     text = 'Write a brief explanation of the history and purpose of' + dictionary[ticker] + '.'
     
     output = openai.Completion.create(
