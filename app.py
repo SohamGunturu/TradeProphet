@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 from datetime import datetime, timedelta, date
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 st.title('Trade Prophet')
 
 # Create the container
@@ -34,3 +34,7 @@ df = yf.download(ticker, start=start, end=end)
 with volume:
     fig_vol = px.area(df, x=df.index, y="Volume", title='Volume')
     st.plotly_chart(fig_vol)
+
+with open_close:
+    fig_oc = px.line(df, x = df.index, y = ["Open", "Close"], title = "Open - Close")
+    st.plotly_chart(fig_oc)
